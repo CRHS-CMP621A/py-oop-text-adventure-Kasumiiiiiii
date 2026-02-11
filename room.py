@@ -12,13 +12,13 @@ class Room():
 
     def get_description(self):
         return self.description
-    
-    def describe(self):
-        print(self.description)
 
 # task 3
     def get_name(self):
         return self.name
+    
+    def set_name(self, room_name):
+        self.name = room_name
     
     def describe(self):
         print(self.description)
@@ -29,6 +29,17 @@ class Room():
 
 # task 4
     def get_details(self):
+        print(self.name)
+        print("======================")
+        print(self.description)
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
             print("The " + room.get_name() + " is " + direction)
+
+# task 5
+    def move(self, direction):
+        if direction in self.linked_rooms:
+            return self.linked_rooms[direction]
+        else:
+            print("You can't go that way")
+            return self
