@@ -5,6 +5,8 @@ class Room():
         self.description = None
 # task 3
         self.linked_rooms = {}
+# challenge 5
+        self.items = {}
 
 # task 2
     def set_description(self, room_description):
@@ -27,11 +29,29 @@ class Room():
         self.linked_rooms[direction] = room_to_link
         print(self.name + " linked rooms: " + repr(self.linked_rooms))
 
+# challenge 5
+    def add_item(self, item_obj):
+        self.items[item_obj.get_name()] = item_obj
+        print(f"{item_obj.get_name()} added to {self.name}!")
+
+    def remove_item(self, item_name):
+        if item_name in self.items:
+            del self.items[item_name]
+            print(f"{item_name} removed from {self.name}!")
+        else:
+            print(f"{item_name} not found in {self.name}!")
+
 # task 4
     def get_details(self):
         print(self.name)
         print("======================")
         print(self.description)
+        # challenge 5
+        if self.items:
+            print("Items in this room: ")
+            for item_name in self.items:
+                item = self.items[item_name]
+                print(f"> {item_name}: {item.get_description()}")
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
             print("The " + room.get_name() + " is " + direction)
@@ -40,6 +60,19 @@ class Room():
     def move(self, direction):
         if direction in self.linked_rooms:
             return self.linked_rooms[direction]
+        else:
+            print("You can't go that way")
+            return self
+        
+# challenge 5
+    def move(self, command):
+        if command in self.linked_rooms:
+            return self.linked_rooms[command]
+        elif command in self.items:
+            item = self.items[command]
+            print(f"you picked up the {command}!")
+            self.remove_item(command)
+            return self
         else:
             print("You can't go that way")
             return self

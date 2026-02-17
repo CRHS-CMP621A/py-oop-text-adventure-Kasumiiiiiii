@@ -28,4 +28,5 @@ class Item():
     def show_info(self):
         print(f"item: {self.name}")
         print(f"description: {self.description}")
-        print(f"value: {self.value} coin")
+        print(f"value: {self.value} golds")
+        print(f"is pickable: {'True' if self.is_pickable else 'False'}")
