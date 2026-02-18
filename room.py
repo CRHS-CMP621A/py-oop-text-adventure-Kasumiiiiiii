@@ -7,6 +7,8 @@ class Room():
         self.linked_rooms = {}
 # challenge 5
         self.items = {}
+# character task 5
+        self.character = None
 
 # task 2
     def set_description(self, room_description):
@@ -51,18 +53,18 @@ class Room():
             print("Items in this room: ")
             for item_name in self.items:
                 item = self.items[item_name]
-                print(f"> {item_name}: {item.get_description()}")
+                print(f"> {item_name}: {item.description}")
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
             print("The " + room.get_name() + " is " + direction)
 
 # task 5
-    def move(self, direction):
-        if direction in self.linked_rooms:
-            return self.linked_rooms[direction]
-        else:
-            print("You can't go that way")
-            return self
+#     def move(self, direction):
+#         if direction in self.linked_rooms:
+#             return self.linked_rooms[direction]
+#         else:
+#             print("You can't go that way")
+#             return self
         
 # challenge 5
     def move(self, command):
@@ -70,9 +72,19 @@ class Room():
             return self.linked_rooms[command]
         elif command in self.items:
             item = self.items[command]
-            print(f"you picked up the {command}!")
-            self.remove_item(command)
+            if item.is_pickable:
+                print(f"you picked up the {command}!")
+                self.remove_item(command)
+            else:
+                print(f"You can't pick up the {command}! It's not pickable!")
             return self
         else:
-            print("You can't go that way")
+            print("You can't go that way and no such item to pick up!")
             return self
+        
+# character task 7
+    def set_character(self, char_obj):
+        self.character = char_obj
+
+    def get_character(self):
+        return self.character

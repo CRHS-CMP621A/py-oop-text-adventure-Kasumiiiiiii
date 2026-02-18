@@ -16,7 +16,7 @@ class Item():
         return self.description
     
     def set_description(self, item_description):
-        self.descrption = item_description
+        self.description = item_description
 
 
     def set_value(self, gold_value):
